@@ -1,15 +1,18 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { ILoginResponse } from "../utils/interface/ILogin";
 
 const Base_URL = 'https://localhost:7217/api/Users/Login';
-const loginUser = async (Email: string, Password: string)=>{ 
+const loginUser = async (Email: string, Password: string):Promise<ILoginResponse | undefined> =>{ 
     try
     {
         const response = await axios.post(`${Base_URL}`, {Email, Password});
+        console.log("login response",response.data);
         if(response.status === 200)
         {
             toast.success('Login Successful');
-            return response;
+            console.log("login service")
+            return response.data;
         }
 
     }
@@ -18,7 +21,7 @@ const loginUser = async (Email: string, Password: string)=>{
     catch(error: any)
     {
         toast.error(`${error.response.data}`);
-        console.log(error.response.data);
+        console.log("login error", error);
     }
     
 }

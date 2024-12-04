@@ -1,5 +1,5 @@
 export interface IPortfolioStatProps {
     title: string,
-    value: number,
-    change?: number
+    value: number | string,
+    change?: number | string,
 }

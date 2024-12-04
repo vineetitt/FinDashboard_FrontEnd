@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import signUpUser from '../apiServices/SignUpServices';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import Login from '../pages/Login';
 
 const SignUp:React.FC = () => {
     const[username, setUsername] = useState('');
