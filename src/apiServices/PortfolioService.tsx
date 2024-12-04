@@ -1,7 +1,5 @@
 import axios from "axios";
 
-
-
 const fetchPortfolioData= async (userID:number,token: string )=>{
     try
     {
