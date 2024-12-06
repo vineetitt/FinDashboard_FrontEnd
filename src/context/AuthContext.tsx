@@ -1,11 +1,10 @@
 import React,{createContext, useContext, useState, useEffect} from 'react'
 import { IUser } from '../utils/interface/ILogin';
 
-
 interface AuthContextType {
     isAuthenticated: boolean;
     user: IUser | null;
-    login: (token: string,user:IUser) => void;
+    login: (token: string, user:IUser) => void;
     logout: () => void;
   }
 

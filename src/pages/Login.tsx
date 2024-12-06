@@ -19,9 +19,9 @@ const Login: React.FC = () => {
       {
         const { token, user } = response;
         console.log("user value in resp",user)
-      login(token,user);
-      localStorage.setItem("jwt", token);
-      navigate("/Portfolio");
+        login(token,user);
+        localStorage.setItem("jwt", token);
+        navigate("/Portfolio");
       }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {

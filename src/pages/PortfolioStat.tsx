@@ -6,7 +6,6 @@ const PortfolioStat:React.FC<IPortfolioStatProps> = ({title, value}) => {
     <div className="bg-gray-50 p-6 rounded-lg shadow-md">
         <h2 className="text-lg font-semibold text-gray-700">{title}</h2>
         <p className="text-3xl mt-3 font-bold text-green-600">{`$${value.toLocaleString()}`}</p>
-        {/* {change && <p className="text-sm text-green-500 mt-1">{`${change}% from yesterday`}</p>} */}
     </div>
   )
 }

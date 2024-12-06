@@ -7,10 +7,7 @@ import { useAuth } from '../context/AuthContext';
 const Portfolio: React.FC = () => {
 
   const {user}=useAuth();
-
-
   const[totalPortfolioValue, setTotalPortfolioValue]=useState<number | null>(null);
-  // const[percentageChange, setPercentageChange]= useState<number | null>(null);
   const[netGainLoss, setNetGainLoss]= useState<number | null>(null);
   const [currentValue, setCurrentValue]= useState<number | null>(null);
 
@@ -22,11 +19,9 @@ const Portfolio: React.FC = () => {
 
         const data = await fetchPortfolioData(user?.userID ?? 0, token);
         setTotalPortfolioValue(data.investedValue);
-        // setPercentageChange(data.profitLoss);
         setCurrentValue(data.currentValue);
         setNetGainLoss(data.profitLoss);
         console.log("data of portfolio",data);
-        
     }
     catch(err){
       console.error('Failed to load portfolio data:', err);

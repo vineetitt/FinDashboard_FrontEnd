@@ -15,13 +15,13 @@ const Navbar: React.FC = () => {
 
         <div className="flex items-center space-x-6">
           
-          <Link to="/"  className="text-gray-600 hover:text-gray-800 cursor-pointer">
+          <Link to="/Portfolio"  className="text-gray-600 hover:text-gray-800 cursor-pointer">
             <FaHome size={24} />
           </Link>
           <Link to="/AssetList" className="text-gray-600 hover:text-gray-800 cursor-pointer">
             <FaChartBar size={24} />
           </Link>
-          <Link to="/Portfolio" className="text-gray-600 hover:text-gray-800 cursor-pointer">
+          <Link to="/Holdings" className="text-gray-600 hover:text-gray-800 cursor-pointer">
             <FaWallet size={24} />
           </Link>
 
