@@ -8,19 +8,25 @@ const signUpUser = async (
   email: string,
   hashPassword: string
 ) => {
-  try {
+  try 
+  {
     const response = await axios.post(BASE_URL, {
       userName,
       email,
       hashPassword,
     });
-    if (response.status === 200) {
+    if (response.status === 200)
+    {
       toast.success("User successfully added!");
     }
-  } catch (error: any) {
-    console.log(error.message);
-    
+  } 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  catch (error: any) 
+  {
+    throw new Error(error.message)  
   }
 };
 
 export default signUpUser;
+
+

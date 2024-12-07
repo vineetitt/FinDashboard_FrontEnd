@@ -10,19 +10,38 @@ const SignUp:React.FC = () => {
     const[confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
 
+    const isValidEmail = (email: string) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      };
+    const isValidPassword = (password: string) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+        return passwordRegex.test(password);
+      };
     const handleSignup = async (e: React.FormEvent)=>{
         e.preventDefault();
         if (password !== confirmPassword) {
             toast.error('Passwords do not match!');
             return;
         } 
+        if(!isValidEmail(email))
+        {
+            toast.error('Invalid email! Format: example@domain.com');
+            return 
+        }
+        if(!isValidPassword(password)){
+            toast.error('Invalid password! Format: At least 6 characters, including uppercase, lowercase, number, and special character');
+            return;
+        }
         try
         {
-            const response = await signUpUser(username, email, password);
+            await signUpUser(username, email, password);
             navigate('/');
         }
-        catch(error: any)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        catch(error:any )
         {
+            console.log(error);
             toast.error(error.message);
         }
     }

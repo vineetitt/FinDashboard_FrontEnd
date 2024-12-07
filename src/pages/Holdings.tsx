@@ -16,9 +16,11 @@ const Holdings: React.FC = () => {
           stockID: holding.stock.stockID,
           stockName: holding.stock.stockName,
           quantity: holding.quantity,
-          purchasePrice: holding.purchasePrice.toFixed(2), 
+          purchasePrice: holding.purchasePrice.toFixed(2),
           currentPrice: holding.stock.currentPrice.toFixed(2),
-          totalValue: (holding.quantity * holding.stock.currentPrice).toFixed(2),
+          totalValue: (holding.quantity * holding.stock.currentPrice).toFixed(
+            2
+          ),
         }));
         setAssets(transformedAssets);
       } catch (err) {
@@ -28,7 +30,6 @@ const Holdings: React.FC = () => {
 
     fetchData();
   }, [user?.userID, token]);
-
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold mb-6">My Assets</h1>
@@ -40,33 +41,50 @@ const Holdings: React.FC = () => {
             <th className="py-2 px-4 text-left">Purchase Price</th>
             <th className="py-2 px-4 text-left">Current Price</th>
             <th className="py-2 px-4 text-left">Total Value</th>
+            <th className="py-2 px-4 text-left">Trend</th>
             <th className="py-2 px-4 text-left">Actions</th>
           </tr>
         </thead>
         <tbody>
           {assets.length > 0 ? (
-            assets.map((asset, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? "bg-white" : "bg-gray-50"
-                } hover:bg-gray-100`}
-              >
-                <td className="py-2 px-4">{asset.stockName}</td>
-                <td className="py-2 px-4">{asset.quantity}</td>
-                <td className="py-2 px-4">${asset.purchasePrice}</td>
-                <td className="py-2 px-4">${asset.currentPrice}</td>
-                <td className="py-2 px-4">${asset.totalValue}</td>
-                <td className="py-2 px-4">
-                  <button className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">
-                    Sell
-                  </button>
-                </td>
-              </tr>
-            ))
+            assets.map((asset, index) => {
+              const isPriceUp = asset.currentPrice > asset.purchasePrice;
+              return (
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                  } hover:bg-gray-100`}
+                >
+                  <td className="py-2 px-4">{asset.stockName}</td>
+                  <td className="py-2 px-4">{asset.quantity}</td>
+                  <td className="py-2 px-4">${asset.purchasePrice}</td>
+                  <td className="py-2 px-4">${asset.currentPrice}</td>
+                  <td className="py-2 px-4">${asset.totalValue}</td>
+                  <td className="py-2 px-4">
+                    {isPriceUp ? (
+                      <span className="text-green-500 font-bold flex items-center">
+                        ▲
+                        <span className="ml-1">Up</span>
+                      </span>
+                    ) : (
+                      <span className="text-red-500 font-bold flex items-center">
+                        ▼      
+                        <span className="ml-1">Down</span>
+                      </span>
+                    )}
+                  </td>
+                  <td className="py-2 px-4">
+                    <button className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">
+                      Sell
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
           ) : (
             <tr>
-              <td className="py-4 px-4 text-center" colSpan={6}>
+              <td className="py-4 px-4 text-center" colSpan={7}>
                 No assets found.
               </td>
             </tr>

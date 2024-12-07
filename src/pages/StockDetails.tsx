@@ -1,15 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import LineChart from '../components/LineChart';
 import { stockContext } from '../context/StockContext';
 import { getStockPriceHistory } from '../apiServices/StockService'; 
 import { useAuth } from '../context/AuthContext'; 
 import PriceCard from '../components/PriceCard';
-
 const StockDetails: React.FC = () => {
     const { symbol } = useParams<{ symbol: string }>();
     const { assets } = useContext(stockContext);
     const token = localStorage.getItem('jwt');
+    const location = useLocation();
+    const {percentageChange} = location.state || {};
+    console.log(percentageChange);
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [stockPriceHistory, setStockPriceHistory] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const foundData = assets?.find((item)=>item.stockName === symbol)
@@ -22,12 +25,17 @@ const StockDetails: React.FC = () => {
                 const stockID = stockData.stockID;
 
                 const fetchStockPriceHistory = async () => {
-                    try {
+                    try 
+                    {
                         const data = await getStockPriceHistory(stockID, token!);
                         setStockPriceHistory(data);
-                    } catch (error) {
+                    } 
+                    catch (error) 
+                    {
                         console.error("Error fetching stock price history:", error);
-                    } finally {
+                    } 
+                    finally 
+                    {
                         setLoading(false);
                     }
                 };
@@ -44,8 +52,9 @@ const StockDetails: React.FC = () => {
     if (!stockPriceHistory) {
         return <div>No stock price history available.</div>;
     }
-
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const prices = stockPriceHistory.map((item: any) => item.price);
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const dates = stockPriceHistory.map((item: any) => item.date);
 
     const realTimeData = {
@@ -89,19 +98,7 @@ const StockDetails: React.FC = () => {
     };
 
     const handleBuyNow = ()=>{
-        navigate(`/PlaceOrder/${symbol}`,
-        {
-            state: {
-                stockId : foundData?.stockID ,
-                currentPrice: foundData?.currentPrice,
-                stockSymbol : symbol ,
-                userId : user?.userID
-            },
-
-        }
-             
-        );
-
+        navigate(`/PlaceOrder/${symbol}?stockID=${foundData?.stockID}&currentPrice=${foundData?.currentPrice}&stockSymbol=${symbol}&userID=${user?.userID}`);
     }
 
     return (

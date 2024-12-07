@@ -12,19 +12,20 @@ const Login: React.FC = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
+    try
+    {
       const response = await loginUser(Email, Password);
-      console.log("response of loginlogin page",response?.user.userID);
       if (response?.token)
       {
         const { token, user } = response;
-        console.log("user value in resp",user)
         login(token,user);
         localStorage.setItem("jwt", token);
         navigate("/Portfolio");
       }
+    } 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
+    catch (error: any)
+    {
       console.log("catch block login login")
       toast.error(error);
     }
