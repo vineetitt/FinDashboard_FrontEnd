@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import SignUp from "./components/SignUp";
 import { StockProvider } from "./context/StockContext";
 import Holdings from "./pages/Holdings";
+import SellHolding from "./pages/SellHolding";
 
 function App() {
   return (
@@ -58,6 +59,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <PlaceOrder />
+                </PrivateRoute>
+              }
+            ></Route>
+            <Route
+              path="/SellHolding/:stockName/:currentPrice/:stockId"
+              element={
+                <PrivateRoute>
+                  <SellHolding />
                 </PrivateRoute>
               }
             ></Route>

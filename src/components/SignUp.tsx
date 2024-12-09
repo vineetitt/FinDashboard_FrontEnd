@@ -30,7 +30,7 @@ const SignUp:React.FC = () => {
             return 
         }
         if(!isValidPassword(password)){
-            toast.error('Invalid password! Format: At least 6 characters, including uppercase, lowercase, number, and special character');
+            toast.error('Invalid password! Format: At least 8 characters, including uppercase, lowercase, number, and special character');
             return;
         }
         try

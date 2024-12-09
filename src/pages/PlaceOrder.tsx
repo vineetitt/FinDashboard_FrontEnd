@@ -10,8 +10,7 @@ const PlaceOrder: React.FC = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const stockIDParam = searchParams.get("stockID");
-  const percentageChange = searchParams.get("percentage");
-  console.log(percentageChange);
+
   const stockID =
     stockIDParam !== null && !isNaN(parseInt(stockIDParam, 10))
       ? parseInt(stockIDParam, 10)
@@ -44,13 +43,11 @@ const PlaceOrder: React.FC = () => {
             navigate("/Portfolio");
         }
     }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     catch(err:any)
     {
       toast.error(err.message);
     }
-    
-   
-    
   };
 
   return (

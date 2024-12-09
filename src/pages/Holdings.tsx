@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { HoldingAsset } from "../utils/interface/IAssets";
 import fetchPortfolioData from "../apiServices/PortfolioService";
 import { useAuth } from "../context/AuthContext";
-
+import { useNavigate } from "react-router-dom";
 const Holdings: React.FC = () => {
   const { user } = useAuth();
   const token = localStorage.getItem("jwt");
   const [assets, setAssets] = useState<HoldingAsset[]>([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await fetchPortfolioData(user?.userID ?? 0, token!);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const transformedAssets = data.holdings.map((holding: any) => ({
           stockID: holding.stock.stockID,
           stockName: holding.stock.stockName,
@@ -30,6 +31,11 @@ const Holdings: React.FC = () => {
 
     fetchData();
   }, [user?.userID, token]);
+
+
+  const handleSelling = (stockName: string, currentPrice: string, stockID: string)=>{
+    navigate(`/SellHolding/${stockName}/${currentPrice}/ ${stockID}`);
+  }
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold mb-6">My Assets</h1>
@@ -69,13 +75,17 @@ const Holdings: React.FC = () => {
                       </span>
                     ) : (
                       <span className="text-red-500 font-bold flex items-center">
-                        ▼      
+                        ▼
                         <span className="ml-1">Down</span>
                       </span>
                     )}
                   </td>
                   <td className="py-2 px-4">
-                    <button className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600">
+                    <button className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600" onClick={
+                      ()=>{
+                        handleSelling(asset.stockName, asset.currentPrice, asset.stockID.toString())
+                      }
+                    }>
                       Sell
                     </button>
                   </td>

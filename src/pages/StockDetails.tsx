@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import LineChart from '../components/LineChart';
 import { stockContext } from '../context/StockContext';
 import { getStockPriceHistory } from '../apiServices/StockService'; 
@@ -9,9 +9,6 @@ const StockDetails: React.FC = () => {
     const { symbol } = useParams<{ symbol: string }>();
     const { assets } = useContext(stockContext);
     const token = localStorage.getItem('jwt');
-    const location = useLocation();
-    const {percentageChange} = location.state || {};
-    console.log(percentageChange);
      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [stockPriceHistory, setStockPriceHistory] = useState<any>(null);
     const [loading, setLoading] = useState(true);
