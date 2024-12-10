@@ -16,6 +16,7 @@ import SignUp from "./components/SignUp";
 import { StockProvider } from "./context/StockContext";
 import Holdings from "./pages/Holdings";
 import SellHolding from "./pages/SellHolding";
+import AdminPage from "./components/admin/AdminPage";
 
 function App() {
   return (
@@ -67,6 +68,14 @@ function App() {
               element={
                 <PrivateRoute>
                   <SellHolding />
+                </PrivateRoute>
+              }
+            ></Route>
+             <Route
+              path="/AdminPage"
+              element={
+                <PrivateRoute>
+                  <AdminPage />
                 </PrivateRoute>
               }
             ></Route>

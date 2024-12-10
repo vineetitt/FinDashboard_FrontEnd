@@ -14,7 +14,6 @@ export const stockContext = createContext<StockContextType>({
 
 export const StockProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [assets, setAssets] = useState<Asset[]>();
-
   return (
     <stockContext.Provider value={{ assets, setAssets }}>
       {children}

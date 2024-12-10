@@ -32,10 +32,13 @@ const Holdings: React.FC = () => {
     fetchData();
   }, [user?.userID, token]);
 
-
-  const handleSelling = (stockName: string, currentPrice: string, stockID: string)=>{
+  const handleSelling = (
+    stockName: string,
+    currentPrice: string,
+    stockID: string
+  ) => {
     navigate(`/SellHolding/${stockName}/${currentPrice}/ ${stockID}`);
-  }
+  };
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold mb-6">My Assets</h1>
@@ -55,6 +58,8 @@ const Holdings: React.FC = () => {
           {assets.length > 0 ? (
             assets.map((asset, index) => {
               const isPriceUp = asset.currentPrice > asset.purchasePrice;
+              const isPriceSame = asset.currentPrice === asset.purchasePrice;
+
               return (
                 <tr
                   key={index}
@@ -70,22 +75,29 @@ const Holdings: React.FC = () => {
                   <td className="py-2 px-4">
                     {isPriceUp ? (
                       <span className="text-green-500 font-bold flex items-center">
-                        ▲
-                        <span className="ml-1">Up</span>
+                        ▲<span className="ml-1">Up</span>
+                      </span>
+                    ) : isPriceSame ? (
+                      <span className="text-yellow-500 font-bold flex items-center">
+                        ▬<span className="ml-1">No Change</span>
                       </span>
                     ) : (
                       <span className="text-red-500 font-bold flex items-center">
-                        ▼
-                        <span className="ml-1">Down</span>
+                        ▼<span className="ml-1">Down</span>
                       </span>
                     )}
                   </td>
                   <td className="py-2 px-4">
-                    <button className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600" onClick={
-                      ()=>{
-                        handleSelling(asset.stockName, asset.currentPrice, asset.stockID.toString())
-                      }
-                    }>
+                    <button
+                      className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600"
+                      onClick={() => {
+                        handleSelling(
+                          asset.stockName,
+                          asset.currentPrice,
+                          asset.stockID.toString()
+                        );
+                      }}
+                    >
                       Sell
                     </button>
                   </td>

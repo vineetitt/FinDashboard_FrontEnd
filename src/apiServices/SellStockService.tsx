@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 const token = localStorage.getItem("jwt");
-console.log(token);
 const handleSellStock = async (
   stockId: number,
   quantity: number,
@@ -25,9 +24,12 @@ const handleSellStock = async (
     toast.error("Quantity cannot be zero");
   }
  }
-  catch (error) {
-    console.log(error);
-  }
+ catch (error) {
+  const message = axios.isAxiosError(error) 
+      ? error.response?.data || "An unexpected error occurred." 
+      : "An error occurred.";
+  toast.error(message);
+}
 };
 
 export default handleSellStock;

@@ -17,6 +17,7 @@ const AssetRow:React.FC<{name: string,percentageChange:number}> = ({name,percent
   
   const changeColor= getChangeColor(percentageChange);
   const navigate = useNavigate();
+  
   const goToStockDetails = ()=>{
   navigate(`/StockDetails/${name}`);
   }

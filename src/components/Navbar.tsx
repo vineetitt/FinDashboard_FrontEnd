@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaHome, FaChartBar, FaWallet } from 'react-icons/fa';
+import { RiChatPrivateFill } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -23,6 +24,9 @@ const Navbar: React.FC = () => {
           </Link>
           <Link to="/Holdings" className="text-gray-600 hover:text-gray-800 cursor-pointer">
             <FaWallet size={24} />
+          </Link>
+          <Link to="/AdminPage" className="text-gray-600 hover:text-gray-800 cursor-pointer">
+            <RiChatPrivateFill size={24} />
           </Link>
 
           <div>
