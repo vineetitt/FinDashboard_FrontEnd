@@ -17,6 +17,7 @@ import { StockProvider } from "./context/StockContext";
 import Holdings from "./pages/Holdings";
 import SellHolding from "./pages/SellHolding";
 import AdminPage from "./components/admin/AdminPage";
+import AdminRoute from "./components/AdminRoute";
 
 function App() {
   return (
@@ -52,9 +53,10 @@ function App() {
               element={
                 <PrivateRoute>
                   <Holdings />
-                </PrivateRoute>
-              }
+               </PrivateRoute>
+               }
             ></Route>
+
             <Route
               path="/Placeorder/:symbol"
               element={
@@ -74,9 +76,9 @@ function App() {
              <Route
               path="/AdminPage"
               element={
-                <PrivateRoute>
+                <AdminRoute>
                   <AdminPage />
-                </PrivateRoute>
+                </AdminRoute>
               }
             ></Route>
             <Route path="/Logout" element={<Logout />}></Route>

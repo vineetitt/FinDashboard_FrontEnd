@@ -21,11 +21,12 @@ ChartJs.register(
    Title, 
    Tooltip);
 
-const LineChart:React.FC<{title: string, chartData: any}> = ({title,chartData}) => {
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+const LineChart:React.FC<{title: string, chartData: any, options?:any }> = ({title,chartData, options}) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md mb-6">
       <h3 className="text-lg font-bold mb-2">{title}</h3>
-      <Line data={chartData} width={500} height={200} />
+      <Line data={chartData} width={500} height={200}  options={options}/>
     </div>
   )
 }

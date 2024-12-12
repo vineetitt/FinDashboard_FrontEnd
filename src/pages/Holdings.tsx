@@ -32,6 +32,8 @@ const Holdings: React.FC = () => {
     fetchData();
   }, [user?.userID, token]);
 
+
+
   const handleSelling = (
     stockName: string,
     currentPrice: string,

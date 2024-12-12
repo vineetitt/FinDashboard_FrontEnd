@@ -13,7 +13,6 @@ const AuthProvider:React.FC<{children: React.ReactNode}> = ({children}) => {
     const[isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState<IUser | null>(null);
     const[loading, setLoading] = useState<boolean>(true);
-
     useEffect(() => {
       const token = localStorage.getItem("jwt");
       const storedUser = localStorage.getItem("user");
@@ -25,14 +24,11 @@ const AuthProvider:React.FC<{children: React.ReactNode}> = ({children}) => {
       setLoading(false);
     }, []);
 
-
-
     const login = (token: string,user:IUser)=>{
       localStorage.setItem('jwt', token);
       localStorage.setItem("user", JSON.stringify(user));
       setIsAuthenticated(true);
       setUser(user);
-      console.log("user in auth context",user);
     };
 
     const logout = () => {

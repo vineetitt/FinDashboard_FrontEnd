@@ -27,7 +27,6 @@ const AssetList: React.FC = () => {
   },[])
 
   useEffect(() => {
-    console.log("Assets have been updated:", assets);
   }, [setAssets])
 
   

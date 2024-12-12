@@ -13,9 +13,10 @@ const BuyHolding = async (stockID: number , currentPrice: number, stockSymbol: s
                 Authorization: `Bearer ${token}`
             }
         })
+        console.log("Hello fam",response);
         return response;
     }
-    catch(error){
+    catch(error ){
         console.log("check cach flag ",error);
         throw error;
     }

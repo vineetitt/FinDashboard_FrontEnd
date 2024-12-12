@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Navbar: React.FC = () => {
-  const {isAuthenticated} = useAuth();
+  const {isAuthenticated, user} = useAuth();
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -25,9 +25,12 @@ const Navbar: React.FC = () => {
           <Link to="/Holdings" className="text-gray-600 hover:text-gray-800 cursor-pointer">
             <FaWallet size={24} />
           </Link>
+          {user?.role==="Admin" ? 
           <Link to="/AdminPage" className="text-gray-600 hover:text-gray-800 cursor-pointer">
             <RiChatPrivateFill size={24} />
           </Link>
+          : < Link to = "/UauthorizedPage" className="text-gray-600 hover:text-gray-400 cursor-pointer"/>
+          }
 
           <div>
                 {isAuthenticated ? (
