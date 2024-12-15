@@ -18,7 +18,6 @@ const handleSellStock = async (
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response);
     return response.status;
   }
   else{

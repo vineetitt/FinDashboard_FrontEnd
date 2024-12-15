@@ -1,7 +1,6 @@
 import React, { createContext, useState } from "react";
 import { Asset } from "../utils/interface/IAssets";
 
-
 interface StockContextType {
   assets: Asset[] | undefined;
   setAssets: React.Dispatch<React.SetStateAction<Asset[] | undefined>>;

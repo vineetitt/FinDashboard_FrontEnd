@@ -19,7 +19,6 @@ const AuthProvider:React.FC<{children: React.ReactNode}> = ({children}) => {
       if (token && storedUser) {
         setIsAuthenticated(true);
         setUser(JSON.parse(storedUser));
-        console.log("stored user ",storedUser);
       }
       setLoading(false);
     }, []);

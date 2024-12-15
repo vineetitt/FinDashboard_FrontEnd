@@ -10,7 +10,6 @@ const fetchPortfolioData= async (userID:number,token: string )=>{
                 Authorization: `Bearer ${token}`
             }
         });
-        console.log("Check it out!", response.data);
         return response.data;
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

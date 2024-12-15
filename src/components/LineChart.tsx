@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react'
 import { Line } from 'react-chartjs-2'
 
@@ -21,7 +22,7 @@ ChartJs.register(
    Title, 
    Tooltip);
 
-   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
 const LineChart:React.FC<{title: string, chartData: any, options?:any }> = ({title,chartData, options}) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md mb-6">

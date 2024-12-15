@@ -16,7 +16,6 @@ const AssetList: React.FC = () => {
         {
           setAssets(response);
         }
-
       }
       catch(err)
       {
@@ -31,7 +30,6 @@ const AssetList: React.FC = () => {
 
   
   return (
-    <stockContext.Provider value={{assets,setAssets}}>
     <div className="bg-gray-50 p-6 rounded-lg shadow-md mt-1">
       <h1 className="text-2xl font-bold mb-4">Assets</h1>
       <div>
@@ -46,7 +44,6 @@ const AssetList: React.FC = () => {
         )})):''}
       </div>
     </div>
-    </stockContext.Provider>
   );
 };
 

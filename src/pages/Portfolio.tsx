@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import PortfolioPerformance from './PortfolioPerformance';
 import PortfolioStat from './PortfolioStat';
@@ -6,15 +7,14 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 
 const Portfolio: React.FC = () => {
-
+  const key = "Csosa8hr01qt3r34gusgcsosa8hr01qt3r34gut0";
   const {user}=useAuth();
   const[totalPortfolioValue, setTotalPortfolioValue]=useState<number | null>(null);
   const[netGainLoss, setNetGainLoss]= useState<number | null>(null);
   const [currentValue, setCurrentValue]= useState<number | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [assets, setAssets]= useState<any[]>([]);
   const [portfolioBeta, setPortfolioBeta]= useState<number | null>(null);
-  const apiKey = "Csosa8hr01qt3r34gusgcsosa8hr01qt3r34gut0";
+  const apiKey = key;
   useEffect(()=>{
     const loadPortfolioData = async ()=>{
       try{
@@ -22,7 +22,6 @@ const Portfolio: React.FC = () => {
         if(!token) throw new Error("User is not authenticated");
 
         const data = await fetchPortfolioData(user?.userID ?? 0, token);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const transformedAssets = data.holdings.map((holding: any) => ({
           stockName: holding.stock.stockName,
           quantity: holding.quantity,
@@ -34,14 +33,13 @@ const Portfolio: React.FC = () => {
         setCurrentValue(data.currentValue);
         setNetGainLoss(data.profitLoss);
 
-        const betaPromises = transformedAssets.map(async (asset) => {
+        const betaPromises = assets.map(async (asset) => { 
           const response = await axios.get("https://finnhub.io/api/v1/stock/metric", {
             params: { symbol: asset.stockName, metric: "all", token: apiKey },
           });
           return { ...asset, beta: response.data.metric.beta || 0 };  
         });
         const assetsWithBeta = await Promise.all(betaPromises);
-        // assetsWithBeta.forEach(asset => {});
         const portfolioBeta = assetsWithBeta.reduce((sum, asset) => {
         const totalValueNum = parseFloat(asset.totalValue); 
         const weight = totalPortfolioValue && totalPortfolioValue > 0 ? totalValueNum / totalPortfolioValue : 0;
