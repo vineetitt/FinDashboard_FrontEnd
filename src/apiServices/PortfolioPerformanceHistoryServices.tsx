@@ -17,7 +17,6 @@ const fetchPortfolioPerformanceData = async (userId: number, date: Date) => {
         },
       }
     );
-    console.log("hello", response);
     return response;
   }
 };

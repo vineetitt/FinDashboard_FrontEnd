@@ -11,7 +11,6 @@ const deleteStock = async (id: number)=>{
                 }
             }
         )
-        console.log("hello",response)
         toast.success("Deleted Successfully");
         return response;
     }

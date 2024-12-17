@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import React, {useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import BuyHolding from "../apiServices/PlaceOrderService";
-
 const PlaceOrder: React.FC = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const stockIDParam = searchParams.get("stockID");
-
   const stockID =
     stockIDParam !== null && !isNaN(parseInt(stockIDParam, 10))
       ? parseInt(stockIDParam, 10)
@@ -19,11 +19,7 @@ const PlaceOrder: React.FC = () => {
     ? parseInt(searchParams.get("currentPrice") as string, 10)
     : 0;
   const stockSymbol = searchParams.get("stockSymbol");
-  const userID = searchParams.get("userID");
-
-  console.log("Stock ID:", stockID);
-  console.log("User ID:", userID);
-
+  // const userID = searchParams.get("userID");
   const [quantity, setQuantity] = useState(0);
   const totalAmount = quantity * currentPrice;
 
@@ -43,7 +39,7 @@ const PlaceOrder: React.FC = () => {
             navigate("/Portfolio");
         }
     }
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    
     catch(err:any)
     {
       toast.error(err.message);

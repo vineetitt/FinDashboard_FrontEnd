@@ -7,17 +7,20 @@ import { getStockPriceHistory } from "../apiServices/StockService";
 import { useAuth } from "../context/AuthContext";
 import PriceCard from "../components/PriceCard";
 import regression from "regression";
-
 const StockDetails: React.FC = () => {
+  const { user } = useAuth();
   const { symbol } = useParams<{ symbol: string }>();
   const { assets } = useContext(stockContext);
   const token = localStorage.getItem("jwt");
   const [stockPriceHistory, setStockPriceHistory] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const foundData = assets?.find((item) => item.stockName === symbol);
+  let foundData = assets?.find((item) => item.stockName === symbol);
   const navigate = useNavigate();
-  const { user } = useAuth();
 
+  let count = 1;
+  useEffect(() => {
+    foundData = assets?.find((item) => item.stockName === symbol);
+  }, [assets]);
   useEffect(() => {
     const fetchStockPriceHistory = async () => {
       if (assets && token) {
@@ -50,7 +53,7 @@ const StockDetails: React.FC = () => {
   }
 
   const prices = stockPriceHistory.map((item: any) => item.price);
-  const dates = stockPriceHistory.map((item: any) => item.date.split('T')[0]);
+  const dates = stockPriceHistory.map((item: any) => item.date.split("T")[0]);
   const dataForRegression = stockPriceHistory.map(
     (item: any, index: number) => [index, item.price]
   );
@@ -113,29 +116,34 @@ const StockDetails: React.FC = () => {
       <h1 className="text-2xl font-bold mb-4">{`Stock Details for ${symbol}`}</h1>
       <div className="grid grid-cols-4 gap-4 mb-6">
         <PriceCard
-          key={foundData?.stockID}
+          key={`foundData?.stockID -${count++} `}
           label={"CurrentPrice"}
           value={foundData ? foundData.currentPrice : 0}
         />
         <PriceCard
-          key={foundData?.stockID}
+          key={`foundData?.stockID -${count++} `}
           label={"PreviousClosePrice"}
           value={foundData ? foundData.closePrice : 0}
         />
         <PriceCard
-          key={foundData?.stockID}
+          key={`foundData?.stockID -${count++} `}
           label={"OpenPrice"}
           value={foundData ? foundData.openPrice : 0}
         />
         <PriceCard
-          key={foundData?.stockID}
+          key={`foundData?.stockID -${count++} `}
           label={"HighPrice"}
           value={foundData ? foundData.highPrice : 0}
         />
         <PriceCard
-          key={foundData?.stockID}
+          key={`foundData?.stockID -${count++} `}
           label={"LowPrice"}
           value={foundData ? foundData.lowPrice : 0}
+        />
+        <PriceCard
+          key={`foundData?.stockID -${count++} `}
+          label={"Quantity"}
+          value={foundData ? foundData.quantity : 0}
         />
       </div>
 
@@ -145,7 +153,7 @@ const StockDetails: React.FC = () => {
           chartData={realTimeData}
           options={options}
         />
-        <LineChart title="Forecasting Trend" chartData={forecastingData}/>
+        <LineChart title="Forecasting Trend" chartData={forecastingData} />
       </div>
 
       <div className="flex justify-center mt-6">

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import fetchPortfolioPerformanceData from "../apiServices/PortfolioPerformanceHistoryServices";
 import { useAuth } from "../context/AuthContext";
@@ -28,9 +29,7 @@ const PortfolioPerformance: React.FC = () => {
       setLoading(true);
       const response = await fetchPortfolioPerformanceData(userId, date);
       if (response?.data.length > 0) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const labels = response?.data.map((item: any) => item.date);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const data = response?.data.map((item: any) => item.portfolioValue);
         const formattedData = {
           labels, 
@@ -62,7 +61,7 @@ const PortfolioPerformance: React.FC = () => {
         Portfolio Performance
       </h2>
       <p className="text-sm text-gray-500 mt-1">
-        Track your portfolio&apos;s performance over the selected time range.
+        Track your portfolio&apos;s performance.
       </p>
       {loading ? (
           <p className="text-gray-500">Loading...</p>

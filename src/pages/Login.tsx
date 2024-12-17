@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import loginUser from "../apiServices/LoginServices";
@@ -23,7 +24,6 @@ const Login: React.FC = () => {
         navigate("/Portfolio");
       }
     } 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     catch (error: any)
     {
       console.log("catch block login login")

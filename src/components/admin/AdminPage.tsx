@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useContext, useEffect, useState } from "react";
 import AddStockForm from "./AddStockForm";
 import StockList, { Stock } from "./StockList";
 import getAllStock from "../../apiServices/StockService";
 import deleteStock from "../../apiServices/DeleteStock";
 import AddStock from "../../apiServices/AddStockService";
+import { stockContext } from "../../context/StockContext";
 
 const AdminPage: React.FC = () => {
 const[stocks, setStocks] = useState<Stock[]>([]);
+
   const token = localStorage.getItem("jwt");
   useEffect(() => {
     const fetchStock = async ()=>{
@@ -21,18 +24,20 @@ const[stocks, setStocks] = useState<Stock[]>([]);
         }
     }
     fetchStock();
-  },[token,stocks]);
+  },[token]);
+
+    const { assets } = useContext(stockContext);
+    useEffect(() => {
+      setStocks(assets);
+    }, [assets]);
+  
 
   const handleAddStock = async (name:string, quantity: number) => {
-
     const response = await AddStock(name, quantity);
-    console.log(response);
-
   };
 
   const handleDeleteStock = async(id:number) => {
     const response= await deleteStock(id);
-    console.log(response);
   };
 
   return (

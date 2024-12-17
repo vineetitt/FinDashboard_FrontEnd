@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 import { ILoginResponse } from "../utils/interface/ILogin";
 
 const Base_URL = 'https://localhost:7217/api/Users/Login';
-console.log("first");
 const loginUser = async (Email: string, Password: string):Promise<ILoginResponse | undefined> =>{ 
     try
     {

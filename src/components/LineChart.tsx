@@ -21,8 +21,7 @@ ChartJs.register(
    Legend, 
    Title, 
    Tooltip);
-
-   
+ 
 const LineChart:React.FC<{title: string, chartData: any, options?:any }> = ({title,chartData, options}) => {
   return (
     <div className="bg-white p-6 rounded-lg shadow-md mb-6">

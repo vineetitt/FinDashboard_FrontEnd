@@ -1,34 +1,11 @@
 import React, { useContext, useEffect,} from "react";
 import AssetRow from "../components/AssetRow";
-import getAllStock from "../apiServices/StockService";
 import { stockContext } from "../context/StockContext";
 
 const AssetList: React.FC = () => {
   const {assets, setAssets} = useContext(stockContext);
-  
-  useEffect(()=>{
-    const LoadStockList = async ()=>{
-      try
-      {
-        const token = localStorage.getItem('jwt');
-        const response = await getAllStock(token);
-        if(response && Array.isArray(response))
-        {
-          setAssets(response);
-        }
-      }
-      catch(err)
-      {
-        console.error(err);
-      }
-    }
-    LoadStockList();
-  },[])
-
   useEffect(() => {
   }, [setAssets])
-
-  
   return (
     <div className="bg-gray-50 p-6 rounded-lg shadow-md mt-1">
       <h1 className="text-2xl font-bold mb-4">Assets</h1>

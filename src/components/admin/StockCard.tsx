@@ -1,4 +1,3 @@
-// src/components/StockCard.tsx
 import React from "react";
 
 type StockCardProps = {

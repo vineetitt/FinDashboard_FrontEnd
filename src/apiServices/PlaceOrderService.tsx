@@ -1,7 +1,7 @@
+/* eslint-disable no-useless-catch */
 import axios from "axios"
 const token = localStorage.getItem("jwt");
 const BuyHolding = async (stockID: number , currentPrice: number, stockSymbol: string, userID:number, quantity: number)=>{
-
     try
     {
         if(quantity==0){
@@ -13,14 +13,11 @@ const BuyHolding = async (stockID: number , currentPrice: number, stockSymbol: s
                 Authorization: `Bearer ${token}`
             }
         })
-        console.log("Hello fam",response);
         return response;
     }
     catch(error ){
-        console.log("check cach flag ",error);
         throw error;
     }
    
 }
-
 export default BuyHolding;

@@ -6,6 +6,7 @@ export interface Asset {
     openPrice: number;
     highPrice: number;
     lowPrice: number;
+    quantity: number;
   }
 
   export interface HoldingAsset {

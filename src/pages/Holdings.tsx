@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { HoldingAsset } from "../utils/interface/IAssets";
 import fetchPortfolioData from "../apiServices/PortfolioService";
@@ -12,7 +13,7 @@ const Holdings: React.FC = () => {
     const fetchData = async () => {
       try {
         const data = await fetchPortfolioData(user?.userID ?? 0, token!);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         const transformedAssets = data.holdings.map((holding: any) => ({
           stockID: holding.stock.stockID,
           stockName: holding.stock.stockName,
@@ -31,8 +32,6 @@ const Holdings: React.FC = () => {
 
     fetchData();
   }, [user?.userID, token]);
-
-
 
   const handleSelling = (
     stockName: string,

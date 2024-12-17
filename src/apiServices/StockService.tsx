@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import axios from "axios"
 
 const getAllStock = async (token: string|null)=>{
@@ -7,12 +8,10 @@ const getAllStock = async (token: string|null)=>{
         headers:{
             Authorization: `Bearer ${token}`
         }
-
     });
     return response.data;
     }
     catch(err){
-        console.log(err);
         throw err;
     }
 }
@@ -32,7 +31,6 @@ export const getStockPriceHistory = async (stockId: number, token: string) => {
         });
         return response.data; 
     } catch (err) {
-        console.error("Error fetching stock price history:", err);
         throw err; 
     }
 };

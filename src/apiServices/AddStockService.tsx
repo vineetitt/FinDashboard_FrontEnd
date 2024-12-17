@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import axios from "axios"
 import { toast } from "react-toastify";
 
@@ -14,7 +15,6 @@ const AddStock = async(stockName: string, quantity:number)=>{
             }
           })
           toast.success("Added Successfully");
-        console.log(response);
     }
     catch(error){
         console.error(error)

@@ -1,7 +1,7 @@
 import React from "react";
 import StockCard from "./StockCard";
 
-export type Stock = {
+export interface Stock  {
   stockID: number;
   stockName: string;
   quantity: number;
@@ -19,7 +19,7 @@ const StockList: React.FC<StockListProps> = ({ stocks, onDelete }) => {
       {stocks.map((stock) => (
         <StockCard
           key={stock.stockID}
-          id= {stock.stockID}
+          id={stock.stockID}
           name={stock.stockName}
           quantity={stock.quantity}
           value={stock.currentPrice}
