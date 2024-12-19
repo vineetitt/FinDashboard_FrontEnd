@@ -21,37 +21,28 @@ import AdminPage from "./components/admin/AdminPage";
 import AdminRoute from "./components/AdminRoute";
 
 function App() {
-  // const [authStatus, setAuthStatus] = useState(false);
-  // setInterval(() => {
-  //   setAuthStatus(useAuth().isAuthenticated);
-  // }, 5000);
+ 
   const { updateAssetQuantity } = useContext(stockContext);
 
   useEffect(() => {
-    // if(!authStatus)
-    //   return;
+    
     try {
       const options: IClientOptions = {
         host: "localhost",
         port: 9001,
       };
-
       const client = mqtt.connect("ws://localhost:9001", options);
       client.on("connect", () => {
-        toast.success("Connected to broker");
         client.subscribe("stocks/#", { qos: 0 });
       });
       client.on("close", () => {
         client.end();
-        toast.error("Disconnected to broker");
       });
 
       client.on("message", (topic: string, message: Buffer) => {
         const messageStr = message.toString();
         const jsonData = JSON.parse(messageStr);
-        console.log(topic, " ", jsonData);
-
-        if (topic === "stocks/sold") {
+        if (topic === "stocks/sold" || topic === "stocks/purchased") {
           const stockID = jsonData["StockId"];
           const updatedQuantity = jsonData["UpdatedQuantity"];
           updateAssetQuantity(stockID, updatedQuantity);

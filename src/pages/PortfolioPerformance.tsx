@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import fetchPortfolioPerformanceData from "../apiServices/PortfolioPerformanceHistoryServices";
 import { useAuth } from "../context/AuthContext";
 import LineChart from "../components/LineChart";
@@ -19,7 +19,6 @@ const PortfolioPerformance: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const currentDate = new Date();
   const { user } = useAuth();
-
   const fetchPortfolioPerformance = async (
     userId: number | undefined,
     date: Date
@@ -28,9 +27,10 @@ const PortfolioPerformance: React.FC = () => {
     try {
       setLoading(true);
       const response = await fetchPortfolioPerformanceData(userId, date);
+      console.log(response);
       if (response?.data.length > 0) {
         const labels = response?.data.map((item: any) => item.date);
-        const data = response?.data.map((item: any) => item.portfolioValue);
+        const data = response?.data.map((item: any) => item.portfolioValue);        
         const formattedData = {
           labels, 
           datasets: [
@@ -53,7 +53,7 @@ const PortfolioPerformance: React.FC = () => {
   };
   useEffect(() => {
     fetchPortfolioPerformance(user?.userID, currentDate);
-  }, [user?.userID]);
+  }, [user?.userID,PortfolioPerformance, Response]);
 
   return (
     <div className="bg-gray-50 p-6 rounded-lg shadow-md">

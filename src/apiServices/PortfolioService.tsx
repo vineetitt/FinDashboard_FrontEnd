@@ -3,7 +3,6 @@ import axios from "axios";
 const fetchPortfolioData= async (userID:number,token: string )=>{
     try
     {
-       
         const response = await axios.get(`https://localhost:7217/api/Portfolio/`, {
             params: {userID},
             headers: {

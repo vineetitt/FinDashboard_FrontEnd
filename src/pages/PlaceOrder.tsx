@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, {useState } from "react";
+import React, {useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 import BuyHolding from "../apiServices/PlaceOrderService";
+import { stockContext } from "../context/StockContext";
 const PlaceOrder: React.FC = () => {
+  const { assets } = useContext(stockContext);
   const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,19 +21,20 @@ const PlaceOrder: React.FC = () => {
     ? parseInt(searchParams.get("currentPrice") as string, 10)
     : 0;
   const stockSymbol = searchParams.get("stockSymbol");
-  // const userID = searchParams.get("userID");
   const [quantity, setQuantity] = useState(0);
   const totalAmount = quantity * currentPrice;
 
   const handlePlaceOrder = async () => {
+    
     try
     {
       const data = await BuyHolding(
         stockID || 0,
-        currentPrice,
-        stockSymbol ?? "stockSymbol",
+        // currentPrice,
+        // stockSymbol ?? "stockSymbol",
         user?.userID || 0,
-        quantity
+        quantity,
+        assets
       );
       if (data) 
         {
@@ -39,10 +42,9 @@ const PlaceOrder: React.FC = () => {
             navigate("/Portfolio");
         }
     }
-    
     catch(err:any)
     {
-      toast.error(err.message);
+      toast.error("Cannot purchase more quantity then we have");
     }
   };
 
@@ -71,5 +73,4 @@ const PlaceOrder: React.FC = () => {
     </div>
   );
 };
-
 export default PlaceOrder;

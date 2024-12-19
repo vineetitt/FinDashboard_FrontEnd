@@ -61,8 +61,8 @@ const Portfolio: React.FC = () => {
       }
     };
     loadPortfolioData();
-  }, [user, apiKey, totalPortfolioValue]);
-  
+  }, [user, totalPortfolioValue]);
+
   return (
     <div>
       <div className="container mx-auto px-4 py-6">

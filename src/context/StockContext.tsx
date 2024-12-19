@@ -49,7 +49,6 @@ export const StockProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const updateAssetQuantity = (stockID: number, quantity: number) => {
-    console.log("update asset quantity");
     setAssets((prevAssets) => {
       
       if (!prevAssets || prevAssets.length === 0) {
