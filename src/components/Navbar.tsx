@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 
 const Navbar: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
+  console.log("users role ",user?.role)
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -14,6 +15,8 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="flex items-center space-x-6">
+          { user?.role === "User" && (
+            <>
           <Link
             to="/Portfolio"
             className="text-gray-600 hover:text-gray-800 cursor-pointer"
@@ -32,6 +35,9 @@ const Navbar: React.FC = () => {
           >
             <FaWallet size={24} />
           </Link>
+          </>
+          )}
+          
           {user?.role === "Admin" ? (
             <Link
               to="/AdminPage"

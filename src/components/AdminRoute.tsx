@@ -16,6 +16,9 @@ interface AdminRouteProps {
     if (user?.role !== "Admin") {
       return <Navigate to="/Portfolio" replace />;
     }
+    // if (user?.role === "Admin") {
+    //   return <Navigate to="/AdminPage" replace />;
+    // }
   
     return <>{children}</>;
   };

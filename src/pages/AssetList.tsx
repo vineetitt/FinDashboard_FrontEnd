@@ -5,7 +5,7 @@ import { stockContext } from "../context/StockContext";
 const AssetList: React.FC = () => {
   const {assets, setAssets} = useContext(stockContext);
   useEffect(() => {
-  }, [setAssets])
+  }, [setAssets,assets])
   return (
     <div className="bg-gray-50 p-6 rounded-lg shadow-md mt-1">
       <h1 className="text-2xl font-bold mb-4">Assets</h1>

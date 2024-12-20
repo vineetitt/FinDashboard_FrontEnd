@@ -2,6 +2,8 @@
 import axios from "axios"
 
 const getAllStock = async (token: string|null)=>{
+    if(!token) throw new Error("Authorization token is missing");
+    
     try
     {
         const response = await axios.get(`https://localhost:7217/api/Stock`,{

@@ -27,7 +27,6 @@ const PortfolioPerformance: React.FC = () => {
     try {
       setLoading(true);
       const response = await fetchPortfolioPerformanceData(userId, date);
-      console.log(response);
       if (response?.data.length > 0) {
         const labels = response?.data.map((item: any) => item.date);
         const data = response?.data.map((item: any) => item.portfolioValue);        

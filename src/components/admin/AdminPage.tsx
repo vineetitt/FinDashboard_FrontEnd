@@ -6,6 +6,7 @@ import getAllStock from "../../apiServices/StockService";
 import deleteStock from "../../apiServices/DeleteStock";
 import AddStock from "../../apiServices/AddStockService";
 import { stockContext } from "../../context/StockContext";
+import { Asset } from "../../utils/interface/IAssets";
 
 const AdminPage: React.FC = () => {
 const[stocks, setStocks] = useState<Stock[]>([]);
@@ -24,20 +25,33 @@ const[stocks, setStocks] = useState<Stock[]>([]);
         }
     }
     fetchStock();
-  },[token]);
+  },[token]);   
 
-    const { assets } = useContext(stockContext);
+    const { assets,setAssets,updateAssetQuantity} = useContext(stockContext);
     useEffect(() => {
       setStocks(assets);
     }, [assets]);
   
 
   const handleAddStock = async (name:string, quantity: number) => {
-    const response = await AddStock(name, quantity);
+    const existingStock:Asset| undefined = assets.find((asset) => asset.stockName === name) 
+
+    if(!existingStock){
+      const response = await AddStock(name, quantity);
+      const responseData = await getAllStock(token);
+      setAssets(responseData);
+      return;
+    }
+    if (existingStock?.stockID > 0 && quantity > 0) {
+      updateAssetQuantity(existingStock.stockID, existingStock.quantity+quantity);
+    } 
+
   };
 
   const handleDeleteStock = async(id:number) => {
-    const response= await deleteStock(id);
+     await deleteStock(id);
+     const responseData = await getAllStock(token);
+     setAssets(responseData);
   };
 
   return (
