@@ -52,7 +52,7 @@ const PortfolioPerformance: React.FC = () => {
   };
   useEffect(() => {
     fetchPortfolioPerformance(user?.userID, currentDate);
-  }, [user?.userID,PortfolioPerformance, Response]);
+  }, []);
 
   return (
     <div className="bg-gray-50 p-6 rounded-lg shadow-md">

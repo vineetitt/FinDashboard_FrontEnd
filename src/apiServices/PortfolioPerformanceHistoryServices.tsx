@@ -3,9 +3,9 @@ import fetchPortfolioData from "./PortfolioService";
 interface Mydata {
   portfolioId: number;
 }
-const token = localStorage.getItem("jwt");
 
 const fetchPortfolioPerformanceData = async (userId: number, date: Date) => {
+  const token = localStorage.getItem("jwt");
   if (token !== null) {
     const gotdata: Mydata = await fetchPortfolioData(userId, token);
     const response = await axios.get(
