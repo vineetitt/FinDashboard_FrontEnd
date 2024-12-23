@@ -52,7 +52,7 @@ const PlaceOrder: React.FC = () => {
     <div className="p-6 bg-gray-50 min-h-screen flex flex-col items-center">
       <h1 className="text-2xl font-bold mb-4">{`Place Order for ${stockSymbol}`}</h1>
       <div className="w-full max-w-sm">
-        <label className="block mb-2 font-medium">Quantity</label>
+        <label className="block mb-2 font-medium">Units</label>
         <input
           type="number"
           className="w-full border border-gray-300 p-2 rounded mb-4"

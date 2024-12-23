@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useContext, useEffect } from "react";
 import mqtt, { IClientOptions } from "mqtt";
 import "./App.css";
@@ -23,6 +22,7 @@ import AdminRoute from "./components/AdminRoute";
 function App() {
  
   const { updateAssetQuantity } = useContext(stockContext);
+
 
   useEffect(() => {
     

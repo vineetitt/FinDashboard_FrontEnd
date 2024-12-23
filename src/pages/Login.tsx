@@ -13,20 +13,20 @@ const Login: React.FC = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    try
-    {
+    try {
       const response = await loginUser(Email, Password);
-      if (response?.token)
-      {
+      if (response?.token) {
         const { token, user } = response;
-        login(token,user);
+        login(token, user);
         localStorage.setItem("jwt", token);
-        navigate("/Portfolio");
+
+        if (user.role === "Admin") {
+          navigate("/AdminPage");
+        } else {
+          navigate("/Portfolio");
+        }
       }
-    } 
-    catch (error: any)
-    {
-      console.log("catch block login login")
+    } catch (error: any) {
       toast.error(error);
     }
   };

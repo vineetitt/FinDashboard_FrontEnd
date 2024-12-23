@@ -47,7 +47,7 @@ const Holdings: React.FC = () => {
         <thead className="bg-gray-200">
           <tr>
             <th className="py-2 px-4 text-left">Stock Name</th>
-            <th className="py-2 px-4 text-left">Quantity</th>
+            <th className="py-2 px-4 text-left">Units</th>
             <th className="py-2 px-4 text-left">Purchase Price</th>
             <th className="py-2 px-4 text-left">Current Price</th>
             <th className="py-2 px-4 text-left">Total Value</th>

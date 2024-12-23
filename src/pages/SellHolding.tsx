@@ -50,7 +50,7 @@ const SellHolding: React.FC = () => {
         <h2 className="text-xl font-semibold mb-4">{stockName}</h2>
         <div className="mb-4">
           <label htmlFor="quantity" className="block text-sm font-medium">
-            Quantity
+            Units
           </label>
           <input
             type="number"

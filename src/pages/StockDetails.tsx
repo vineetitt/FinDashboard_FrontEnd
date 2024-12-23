@@ -112,38 +112,53 @@ const StockDetails: React.FC = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-gray-50 min-h-screen relative">
+      <div className="absolute top-6 right-6">
+        <button
+          className="bg-black text-white font-bold py-1 px-8 rounded hover:bg-blue-600 transition"
+          onClick={handleBuyNow}
+        >
+          Buy Now
+        </button>
+      </div>
+
       <h1 className="text-2xl font-bold mb-4">{`Stock Details for ${symbol}`}</h1>
       <div className="grid grid-cols-4 gap-4 mb-6">
         <PriceCard
-          key={`foundData?.stockID -${count++} `}
+          key={`foundData?.stockID -${count++}`}
           label={"CurrentPrice"}
           value={foundData ? foundData.currentPrice : 0}
+          showCurrency = {false}
         />
         <PriceCard
-          key={`foundData?.stockID -${count++} `}
+          key={`foundData?.stockID -${count++}`}
           label={"PreviousClosePrice"}
           value={foundData ? foundData.closePrice : 0}
+          showCurrency = {false}
         />
         <PriceCard
-          key={`foundData?.stockID -${count++} `}
+          key={`foundData?.stockID -${count++}`}
           label={"OpenPrice"}
           value={foundData ? foundData.openPrice : 0}
+          showCurrency = {false}
         />
         <PriceCard
-          key={`foundData?.stockID -${count++} `}
+          key={`foundData?.stockID -${count++}`}
           label={"HighPrice"}
           value={foundData ? foundData.highPrice : 0}
+          showCurrency = {false}
         />
         <PriceCard
-          key={`foundData?.stockID -${count++} `}
+          key={`foundData?.stockID -${count++}`}
           label={"LowPrice"}
           value={foundData ? foundData.lowPrice : 0}
+          showCurrency = {false}
         />
         <PriceCard
-          key={`foundData?.stockID -${count++} `}
-          label={"Quantity"}
+          key={`foundData?.stockID -${count++}`}
+          label={"Units"}
           value={foundData ? foundData.quantity : 0}
+          showCurrency = {true}
         />
       </div>
 
@@ -154,15 +169,6 @@ const StockDetails: React.FC = () => {
           options={options}
         />
         <LineChart title="Forecasting Trend" chartData={forecastingData} />
-      </div>
-
-      <div className="flex justify-center mt-6">
-        <button
-          className="bg-black text-white font-bold py-3 px-24 rounded hover:bg-blue-600 transition"
-          onClick={handleBuyNow}
-        >
-          Buy Now
-        </button>
       </div>
     </div>
   );

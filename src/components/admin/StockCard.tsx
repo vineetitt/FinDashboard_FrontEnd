@@ -13,7 +13,7 @@ const StockCard: React.FC<StockCardProps> = ({ id,name, quantity, value, onDelet
     <div className="border border-gray-300 p-4 rounded-md shadow-sm flex justify-between items-center">
       <div>
         <h3 className="font-bold">{name}</h3>
-        <p>Quantity: {quantity}</p>
+        <p>Units: {quantity}</p>
         <p>Value: ${value}</p>
       </div>
       <button

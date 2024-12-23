@@ -81,6 +81,7 @@ const Portfolio: React.FC = () => {
           <PortfolioStat
             title="Net Gain/Loss"
             value={netGainLoss ?? "N/A"}
+            isProfitLoss={true}
           ></PortfolioStat>
         </div>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { IPortfolioStatProps } from "../utils/interface/IPortfolioStatProps";
 
-const PortfolioStat: React.FC<IPortfolioStatProps> = ({ title, value, beta }) => {
+const PortfolioStat: React.FC<IPortfolioStatProps> = ({ title, value, beta, isProfitLoss }) => {
   const riskPercentage = beta !=null  ? Math.min(beta * 50, 100) : 0;
 
   const riskColor =
@@ -16,10 +16,14 @@ const PortfolioStat: React.FC<IPortfolioStatProps> = ({ title, value, beta }) =>
       ? `₹${value.toLocaleString()}`
       : "N/A";
 
+  const valueColor = isProfitLoss && value !== 'N/A' && Number(value) < 0 ? "text-red-600" : "text-green-600";
+
   return (
     <div className="bg-gray-50 p-6 rounded-lg shadow-md">
       <h2 className="text-lg font-semibold text-gray-700">{title}</h2>
-      <p className="text-3xl mt-3 font-bold text-green-600">{formattedValue}</p>
+      <p className={`text-3xl mt-3 font-bold ${isProfitLoss ? valueColor : ""}`}>
+      {formattedValue}
+      </p>
 
       {beta !== undefined && (
         <div className="mt-4">

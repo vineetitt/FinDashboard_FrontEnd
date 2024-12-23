@@ -3,7 +3,7 @@ import AssetRow from "../components/AssetRow";
 import { stockContext } from "../context/StockContext";
 
 const AssetList: React.FC = () => {
-  const {assets, setAssets} = useContext(stockContext);
+  const {assets,setAssets} = useContext(stockContext);
   useEffect(() => {
   }, [setAssets,assets])
   return (

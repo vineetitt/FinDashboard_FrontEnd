@@ -12,7 +12,6 @@ const Navbar: React.FC = () => {
         <div className="text-2xl font-bold text-gray-800 w-full place-content-center">
           FinPortfolio
         </div>
-
         <div className="flex items-center space-x-6">
           { user?.role === "User" && (
             <>

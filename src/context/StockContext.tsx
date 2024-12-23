@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { Asset } from "../utils/interface/IAssets";
 import getAllStock from "../apiServices/StockService";
+import { useAuth } from "./AuthContext";
 
 type StockContextType ={
   assets: Asset[];
@@ -17,27 +18,29 @@ export const stockContext = createContext<StockContextType >({
 });
 
 export const StockProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+
+  const {isAuthenticated} = useAuth();
   
-  const [assets, setAssets] = useState<Asset[]>([]);
+  const [assets, setAssets] = useState<Asset[]>([]);  
+  const LoadStockList = async ()=>{
+    try
+    {
+      const token = localStorage.getItem('jwt');
+      const response = await getAllStock(token);
+      if(response && Array.isArray(response))
+        {
+          setAssets(response);
+      }
+    }
+    catch(err)
+    {
+      console.error(err);
+    }
+  }
 
    useEffect(()=>{
-      const LoadStockList = async ()=>{
-        try
-        {
-          const token = localStorage.getItem('jwt');
-          const response = await getAllStock(token);
-          if(response && Array.isArray(response))
-          {
-            setAssets(response);
-          }
-        }
-        catch(err)
-        {
-          console.error(err);
-        }
-      }
       LoadStockList();
-    },[])
+    },[isAuthenticated])
   
   const updateAssetPrice = (updatedStock: Asset) => {
     setAssets((prevAssets) => {
