@@ -17,7 +17,7 @@ const SignUp: React.FC = () => {
   };
   const isValidPassword = (password: string) => {
     const passwordRegex =
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/;
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     return passwordRegex.test(password);
   };
   const handleSignup = async (e: React.FormEvent) => {

@@ -2,11 +2,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ILoginResponse } from "../utils/interface/ILogin";
 
-const Base_URL = 'https://localhost:7217/api/Users/Login';
+const apiUrl  = import.meta.env.VITE_API_URL;
 const loginUser = async (Email: string, Password: string):Promise<ILoginResponse | undefined> =>{ 
     try
     {
-        const response = await axios.post(`${Base_URL}`, {Email, Password});        
+        const response = await axios.post(`${apiUrl}/Users/Login`, {Email, Password});        
         if(response.status === 200)
         {
             toast.success('Login Successful');

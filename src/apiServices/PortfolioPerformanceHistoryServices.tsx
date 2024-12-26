@@ -6,10 +6,11 @@ interface Mydata {
 
 const fetchPortfolioPerformanceData = async (userId: number, date: Date) => {
   const token = localStorage.getItem("jwt");
+  const apiUrl = import.meta.env.VITE_API_URL
   if (token !== null) {
     const gotdata: Mydata = await fetchPortfolioData(userId, token);
     const response = await axios.get(
-      `https://localhost:7217/api/PortfolioPerformanceHistory`,
+      `${apiUrl}/PortfolioPerformanceHistory`,
       {
         params: {
           portfolioID: gotdata.portfolioId,

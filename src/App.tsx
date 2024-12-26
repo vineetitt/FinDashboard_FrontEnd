@@ -20,12 +20,9 @@ import AdminPage from "./components/admin/AdminPage";
 import AdminRoute from "./components/AdminRoute";
 
 function App() {
- 
   const { updateAssetQuantity } = useContext(stockContext);
 
-
   useEffect(() => {
-    
     try {
       const options: IClientOptions = {
         host: "localhost",

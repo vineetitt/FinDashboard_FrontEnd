@@ -2,9 +2,9 @@ import axios from "axios"
 import { toast } from "react-toastify"
 
 const deleteStock = async (id: number)=>{
-    console.log("id ", id)
+    const apiUrl = import.meta.env.VITE_API_URL;
     try{
-        const response = await axios.delete(`https://localhost:7217/api/Stock/${id}`,
+        const response = await axios.delete(`${apiUrl}/Stock/${id}`,
             {
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('jwt')}`

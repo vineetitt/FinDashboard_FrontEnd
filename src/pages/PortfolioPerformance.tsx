@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import fetchPortfolioPerformanceData from "../apiServices/PortfolioPerformanceHistoryServices";
 import { useAuth } from "../context/AuthContext";
 import LineChart from "../components/LineChart";
@@ -15,7 +15,7 @@ interface ChartData {
   }[];
 }
 const PortfolioPerformance: React.FC = () => {
-  const [chartData, setChartData] = useState<ChartData| null>(null);
+  const [chartData, setChartData] = useState<ChartData | null>(null);
   const [loading, setLoading] = useState(true);
   const currentDate = new Date();
   const { user } = useAuth();
@@ -29,13 +29,13 @@ const PortfolioPerformance: React.FC = () => {
       const response = await fetchPortfolioPerformanceData(userId, date);
       if (response?.data.length > 0) {
         const labels = response?.data.map((item: any) => item.date);
-        const data = response?.data.map((item: any) => item.portfolioValue);        
+        const data = response?.data.map((item: any) => item.portfolioValue);
         const formattedData = {
-          labels, 
+          labels,
           datasets: [
             {
               label: "Portfolio Value",
-              data, 
+              data,
               borderColor: "blue",
               borderWidth: 2,
               tension: 0.4,
@@ -63,12 +63,15 @@ const PortfolioPerformance: React.FC = () => {
         Track your portfolio&apos;s performance.
       </p>
       {loading ? (
-          <p className="text-gray-500">Loading...</p>
-        ) : chartData ? (
-          <LineChart title="Portfolio Performance History" chartData={chartData}  />
-        ) : (
-          <p className="text-gray-500">No data available.</p>
-        )}
+        <p className="text-gray-500">Loading...</p>
+      ) : chartData ? (
+        <LineChart
+          title="Portfolio Performance History"
+          chartData={chartData}
+        />
+      ) : (
+        <p className="text-gray-500">No data available.</p>
+      )}
     </div>
   );
 };

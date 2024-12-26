@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 const token = localStorage.getItem("jwt");
+const apiUrl = import.meta.env.VITE_API_URL
 const handleSellStock = async (
   stockId: number,
   quantity: number,
@@ -8,7 +9,7 @@ const handleSellStock = async (
 ) => {
   try {
     if(quantity>0){
-    const response = await axios.delete("https://localhost:7217/api/Holding", {
+    const response = await axios.delete(`${apiUrl}/Holding`, {
       data: {
         userId,
         stockId,

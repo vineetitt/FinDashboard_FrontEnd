@@ -3,7 +3,6 @@ import axios from "axios";
 import { Asset } from "../utils/interface/IAssets";
 import { toast } from "react-toastify";
 
-const token = localStorage.getItem("jwt");
 
 const BuyHolding = async (
   stockID: number,
@@ -19,8 +18,10 @@ const BuyHolding = async (
     } else if (quantity == 0) {
       throw new Error("Quantity cannot be zero");
     } else {
+      const token = localStorage.getItem("jwt");
+      const apiUrl = import.meta.env.VITE_API_URL
       const response = await axios.post(
-        `https://localhost:7217/api/Holding`,
+        `${apiUrl}/Holding`,
         { userId: userID, stockId: stockID, quantity: quantity },
         {
           headers: {

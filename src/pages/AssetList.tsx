@@ -1,11 +1,11 @@
-import React, { useContext, useEffect,} from "react";
+import React, { useContext,} from "react";
 import AssetRow from "../components/AssetRow";
 import { stockContext } from "../context/StockContext";
 
 const AssetList: React.FC = () => {
-  const {assets,setAssets} = useContext(stockContext);
-  useEffect(() => {
-  }, [setAssets,assets])
+  const {assets} = useContext(stockContext);
+  // useEffect(() => {
+  // }, [setAssets,assets])
   return (
     <div className="bg-gray-50 p-6 rounded-lg shadow-md mt-1">
       <h1 className="text-2xl font-bold mb-4">Assets</h1>

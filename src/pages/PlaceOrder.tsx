@@ -30,8 +30,6 @@ const PlaceOrder: React.FC = () => {
     {
       const data = await BuyHolding(
         stockID || 0,
-        // currentPrice,
-        // stockSymbol ?? "stockSymbol",
         user?.userID || 0,
         quantity,
         assets
