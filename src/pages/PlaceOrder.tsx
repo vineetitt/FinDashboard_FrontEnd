@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, {useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
@@ -25,23 +25,18 @@ const PlaceOrder: React.FC = () => {
   const totalAmount = quantity * currentPrice;
 
   const handlePlaceOrder = async () => {
-    
-    try
-    {
+    try {
       const data = await BuyHolding(
         stockID || 0,
         user?.userID || 0,
         quantity,
         assets
       );
-      if (data) 
-        {
-            toast.success("Added");
-            navigate("/Portfolio");
-        }
-    }
-    catch(err:any)
-    {
+      if (data) {
+        toast.success("Added");
+        navigate("/Portfolio");
+      }
+    } catch (err: any) {
       toast.error("Cannot purchase more quantity then we have");
     }
   };

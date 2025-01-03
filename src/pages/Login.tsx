@@ -18,8 +18,6 @@ const Login: React.FC = () => {
       if (response?.token) {
         const { token, user } = response;
         login(token, user);
-        localStorage.setItem("jwt", token);
-
         if (user.role === "Admin") {
           navigate("/AdminPage");
         } else {

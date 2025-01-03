@@ -9,25 +9,20 @@ import { stockContext } from "../../context/StockContext";
 import { Asset } from "../../utils/interface/IAssets";
 
 const AdminPage: React.FC = () => {
-  const [stocks, setStocks] = useState<Stock[]>([]);
+  const { assets, setAssets, updateAssetQuantity } = useContext(stockContext);
 
   const token = localStorage.getItem("jwt");
   useEffect(() => {
     const fetchStock = async () => {
       try {
-        const response: Stock[] = await getAllStock(token);
-        setStocks(response);
+        const response = await getAllStock(token);
+        setAssets(response);
       } catch (error) {
         console.error("Error fetching stock:", error);
       }
     };
     fetchStock();
-  }, [token]);
-
-  const { assets, setAssets, updateAssetQuantity } = useContext(stockContext);
-  useEffect(() => {
-    setStocks(assets);
-  }, [assets]);
+  }, [setAssets]);
 
   const handleAddStock = async (name: string, quantity: number) => {
     const existingStock: Asset | undefined = assets.find(
@@ -35,7 +30,7 @@ const AdminPage: React.FC = () => {
     );
 
     if (!existingStock) {
-      const response = await AddStock(name, quantity);
+      await AddStock(name, quantity);
       const responseData = await getAllStock(token);
       setAssets(responseData);
       return;
@@ -61,7 +56,7 @@ const AdminPage: React.FC = () => {
         <AddStockForm onAdd={handleAddStock} />
         <div className="mt-6 bg-white p-4 shadow-md rounded-lg">
           <h2 className="text-xl font-semibold mb-4">Stock List</h2>
-          <StockList stocks={stocks} onDelete={handleDeleteStock} />
+          <StockList stocks={assets} onDelete={handleDeleteStock} />
         </div>
       </div>
     </div>

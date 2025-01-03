@@ -128,37 +128,37 @@ const StockDetails: React.FC = () => {
           key={`foundData?.stockID -${count++}`}
           label={"CurrentPrice"}
           value={foundData ? foundData.currentPrice : 0}
-          showCurrency = {false}
+          showCurrency={false}
         />
         <PriceCard
           key={`foundData?.stockID -${count++}`}
           label={"PreviousClosePrice"}
           value={foundData ? foundData.closePrice : 0}
-          showCurrency = {false}
+          showCurrency={false}
         />
         <PriceCard
           key={`foundData?.stockID -${count++}`}
           label={"OpenPrice"}
           value={foundData ? foundData.openPrice : 0}
-          showCurrency = {false}
+          showCurrency={false}
         />
         <PriceCard
           key={`foundData?.stockID -${count++}`}
           label={"HighPrice"}
           value={foundData ? foundData.highPrice : 0}
-          showCurrency = {false}
+          showCurrency={false}
         />
         <PriceCard
           key={`foundData?.stockID -${count++}`}
           label={"LowPrice"}
           value={foundData ? foundData.lowPrice : 0}
-          showCurrency = {false}
+          showCurrency={false}
         />
         <PriceCard
           key={`foundData?.stockID -${count++}`}
           label={"Units"}
           value={foundData ? foundData.quantity : 0}
-          showCurrency = {true}
+          showCurrency={true}
         />
       </div>
 

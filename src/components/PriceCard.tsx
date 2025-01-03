@@ -9,7 +9,7 @@ const PriceCard: React.FC<{
     <div className="bg-white p-4 rounded-lg shadow-md text-center">
       <h2 className="text-sm font-medium text-gray-500">{label}</h2>
       <p className="text-2xl font-bold text-gray-800">
-        {showCurrency != true ? `₹${value}` : value}
+        {showCurrency != true ? `$${value}` : value}
       </p>
     </div>
   );

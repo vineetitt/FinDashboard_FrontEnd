@@ -6,14 +6,14 @@ type AddStockFormProps = {
 
 const AddStockForm: React.FC<AddStockFormProps> = ({ onAdd }) => {
   const [name, setName] = useState("");
-  const [quantity, setQuantity] = useState<number | "">(""); 
+  const [quantity, setQuantity] = useState<number | "">("");
 
   const handleSubmit = () => {
     if (!name || quantity === "" || quantity <= 0) {
       alert("Please provide valid stock details.");
       return;
     }
-    onAdd(name, Number(quantity)); 
+    onAdd(name, Number(quantity));
     setName("");
     setQuantity("");
   };
@@ -30,12 +30,12 @@ const AddStockForm: React.FC<AddStockFormProps> = ({ onAdd }) => {
       <input
         type="number"
         placeholder="Quantity"
-        value={quantity === "" ? "" : quantity} 
+        value={quantity === "" ? "" : quantity}
         onChange={(e) => setQuantity(Number(e.target.value))}
         className="border border-gray-300 rounded-md p-2"
       />
       <button
-        onClick={handleSubmit} 
+        onClick={handleSubmit}
         className="bg-green-500 text-white py-2 px-4 rounded-md"
       >
         Add Stock

@@ -1,14 +1,22 @@
 import React from "react";
 
 type StockCardProps = {
-  id:number;
+  id: number;
   name: string;
   quantity: number;
   value: number;
   onDelete: (id: number) => void;
+  isDisabled: boolean;
 };
 
-const StockCard: React.FC<StockCardProps> = ({ id,name, quantity, value, onDelete }) => {
+const StockCard: React.FC<StockCardProps> = ({
+  id,
+  name,
+  quantity,
+  value,
+  onDelete,
+  isDisabled,
+}) => {
   return (
     <div className="border border-gray-300 p-4 rounded-md shadow-sm flex justify-between items-center">
       <div>
@@ -17,8 +25,13 @@ const StockCard: React.FC<StockCardProps> = ({ id,name, quantity, value, onDelet
         <p>Value: ${value}</p>
       </div>
       <button
-        onClick={()=>onDelete(id)}
-        className="bg-red-500 text-white py-1 px-3 rounded-md"
+        onClick={() => onDelete(id)}
+        className={`py-1 px-3 rounded-md ${
+          isDisabled
+            ? "bg-gray-300 text-gray-600 cursor-not-allowed"
+            : "bg-red-500 text-white"
+        }`}
+        disabled={isDisabled}
       >
         Delete
       </button>

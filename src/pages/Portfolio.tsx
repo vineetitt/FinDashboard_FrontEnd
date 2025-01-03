@@ -5,10 +5,15 @@ import PortfolioStat from "./PortfolioStat";
 import fetchPortfolioData from "../apiServices/PortfolioService";
 import { useAuth } from "../context/AuthContext";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Portfolio: React.FC = () => {
   const key = "Csosa8hr01qt3r34gusgcsosa8hr01qt3r34gut0";
+  const navigate = useNavigate();
   const { user } = useAuth();
+  if (user?.role == "Admin") {
+    navigate("/AdminPage");
+  }
   const [totalPortfolioValue, setTotalPortfolioValue] = useState<number | null>(
     null
   );

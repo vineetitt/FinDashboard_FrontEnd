@@ -13,7 +13,7 @@ const PortfolioStat: React.FC<IPortfolioStatProps> = ({ title, value, beta, isPr
 
   const formattedValue =
     value !== null && value !== undefined
-      ? `₹${value.toLocaleString()}`
+      ? `$${value.toLocaleString()}`
       : "N/A";
 
   const valueColor = isProfitLoss && value !== 'N/A' && Number(value) < 0 ? "text-red-600" : "text-green-600";
